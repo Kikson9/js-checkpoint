@@ -1,0 +1,16 @@
+# Node-related
+node_modules/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor config files
+.vscode/
+*.log
+
+# Environment files 
+.env
+
+# Prettier ignore
+.prettiercache
