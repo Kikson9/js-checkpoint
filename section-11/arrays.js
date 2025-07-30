@@ -142,3 +142,168 @@ const movementsDescriptions = movements.map((mov, i) => {
 });
 
 console.log(movementsDescriptions);
+
+// ----- MORE ARRAY METHODS ------
+
+movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// FILTER METOD
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(deposits);
+
+const depositsFor = [];
+for (const mov of movements) {
+  if (mov > 0) depositsFor.push(mov);
+}
+console.log(depositsFor);
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
+
+const withdrawalsFor = [];
+
+for (const mov of movements) {
+  if (mov < 0) withdrawalsFor.push(mov);
+}
+console.log(withdrawalsFor);
+
+// ----- REDUCE METHOD ------
+
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+console.log(balance);
+
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+
+console.log(max);
+
+const min = movements.reduce((acc, cur) => {
+  if (acc < cur) return acc;
+  else return cur;
+}, movements[0]);
+
+console.log(min);
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages)
+4. Run the function for both test datasets
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 
+*/
+
+let dogAges = [5, 2, 4, 1, 15, 8, 3];
+
+const calcAverageHumanAge = function (ages) {
+  const humanAges = ages
+    .map(function (age, i) {
+      if (age <= 2) return 2 * age;
+      else if (age > 2) return 16 + age * 4;
+      console.log(age);
+    })
+    .filter(age => age >= 18);
+
+  // const avg = humanAges.reduce((acc, cur) => acc + cur, 0) / humanAges.length;
+  const avg = humanAges.reduce((acc, cur) => acc + cur / humanAges.length, 0);
+  console.log(humanAges);
+  return avg;
+};
+
+const avg1 = calcAverageHumanAge(dogAges);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+console.log(avg1);
+console.log(avg2);
+
+movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// ------ METHOD CHAINING ------
+
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
+
+///////////////////////////////////////
+// Coding Challenge #3
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 
+*/
+
+dogAges = [5, 2, 4, 1, 15, 8, 3];
+
+const calcAverageHumanAge2 = ages =>
+  ages
+    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter(age => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+
+calcAverageHumanAge2(dogAges);
+const avg4 = calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]);
+console.log(avg4);
+
+// ----- FIND METHOD ----
+// Data
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
