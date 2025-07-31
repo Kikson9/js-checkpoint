@@ -307,3 +307,20 @@ console.log(firstWithdrawal);
 console.log(accounts);
 
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+
+///////////////////////////
+// The New findLast and findLastIndex Methods
+console.log(movements);
+
+const lastWithdrawal = movements.findLast(mov => mov < 0);
+console.log(lastWithdrawal);
+
+`Your lastest large withdrawal was X movements ago`;
+const lastestWithdrawalIndex = movements.findLastIndex(
+  mov => Math.abs(mov) > 1000
+);
+console.log(
+  `Your latest large withdrawal was ${
+    movements.length - lastestWithdrawalIndex
+  } movements ago`
+);
