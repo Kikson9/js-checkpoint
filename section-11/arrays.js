@@ -324,3 +324,25 @@ console.log(
     movements.length - lastestWithdrawalIndex
   } movements ago`
 );
+
+// SOME METHOD
+console.log(movements);
+// EQUALITY
+console.log(movements.includes(-130));
+
+// CONDITION
+console.log(movements.some(mov => mov === -130));
+
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
+
+// EVERY METHOD
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+// We can also have separate callbacks
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.find(deposit));
+console.log(movements.filter(deposit));
