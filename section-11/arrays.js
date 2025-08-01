@@ -346,3 +346,32 @@ console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.find(deposit));
 console.log(movements.filter(deposit));
+
+// flat and flatMap array methods
+const Nestedarr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(Nestedarr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+
+const overallBalance = allMovements.reduce((acc, cur) => acc + cur);
+console.log(overallBalance);
+
+// flat
+const overallBalance2 = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, cur) => acc + cur, 0);
+console.log(overallBalance2);
+
+// flatMap
+const overallBalance3 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, cur) => acc + cur, 0);
+console.log(overallBalance3);
