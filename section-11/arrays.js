@@ -598,3 +598,12 @@ console.log(reversedMov);
 const newMovements = movements.with(1, 2000);
 console.log(newMovements);
 console.log(movements);
+
+/*
+// toSorted() takes the array and compares items two at a time:
+/// 1. It passes two items — say a and b — to your callback.
+// 2. Your callback returns:
+// a negative number → put a before b
+// a positive number → put b before a
+// 0 → leave them as-is
+*/
