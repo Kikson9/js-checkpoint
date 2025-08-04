@@ -101,3 +101,48 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'blue';
   });
 });
+
+//////////////////////////
+// Numeric separators
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const priceCents = 345_99;
+console.log(priceCents);
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+const PI = 3.14_15;
+console.log(PI);
+
+console.log(Number('230000'));
+console.log(parseInt('230_000'));
+
+// Working with BigInt
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+
+console.log(43089766982782857647856786896293658962359n);
+console.log(BigInt(4308976698278));
+
+// operations
+console.log(10000n + 10000n);
+console.log(278748589486982789278957n * 10000000n);
+
+const huge = 203895784785689387893798n;
+const num = 23;
+console.log(huge * BigInt(num));
+
+// Exceptions of the BigInt
+console.log(20n > 15);
+console.log(20n === 20);
+console.log(typeof 20n);
+console.log(20n == '20');
+// console.log(Math.sqrt(16n)); // does not work
+
+console.log(huge + ' is REALLLY big!!!');
+
+// Divisions
+console.log(11n / 3n);
+console.log(10 / 3);
