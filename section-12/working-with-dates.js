@@ -131,8 +131,8 @@ console.log(10000n + 10000n);
 console.log(278748589486982789278957n * 10000000n);
 
 const huge = 203895784785689387893798n;
-const num = 23;
-console.log(huge * BigInt(num));
+const num1 = 23;
+console.log(huge * BigInt(num1));
 
 // Exceptions of the BigInt
 console.log(20n > 15);
@@ -192,3 +192,32 @@ const days1 = calcDaysPassed(
   new Date(2037, 3, 14, 10, 8)
 );
 console.log(days1);
+
+///////////////////////////////////////
+// Internationalizing Numbers (Intl)
+
+const num = 3884764.23;
+
+const options = {
+  style: 'currency', // unit, percent, currency
+  unit: 'celsius',
+  currency: 'EUR',
+  // useGrouping: false,
+};
+
+console.log(
+  'US:            ',
+  new Intl.NumberFormat('en-US', options).format(num)
+);
+console.log(
+  'Germany:            ',
+  new Intl.NumberFormat('de-DE', options).format(num)
+);
+console.log(
+  'Syria:            ',
+  new Intl.NumberFormat('ar-SY', options).format(num)
+);
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(num)
+);
