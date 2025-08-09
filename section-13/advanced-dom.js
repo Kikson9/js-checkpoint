@@ -182,9 +182,40 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   console.log(e.target);
   e.preventDefault();
 
-  // Matching strategy: to ignnore clicks that did not happen on the links we need
+  // Matching strategy: to ignore clicks that did not happen on the links we need
   if (e.target.classList.contains('nav__link')) {
     const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
+});
+
+////////////////////////////////////////////////
+// DOM traversing
+const h1 = document.querySelector('h1');
+
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children); // A HTML collection is a live collection and is updated
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upwards
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+// closest finds the nearest parent from the query string
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// Going sideways: Selecting siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+// the below returns nodes instead so work with the above
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
 });
