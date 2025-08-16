@@ -422,3 +422,125 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2010, 'Computer Science');
 jay.introduce();
 jay.calcAge();
+
+///////////////////////////////////////////
+// More examples with classes
+
+class Account1 {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public interface
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdrawal(val) {
+    this.deposit(-val);
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan approved!');
+    }
+  }
+}
+
+const acc1 = new Account1('Jonas', 'EUR', 1111);
+
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+acc1.deposit(250);
+acc1.withdrawal(140);
+acc1.requestLoan(1000);
+acc1.approveLoan(1000);
+
+console.log(acc1);
+
+//////////////////////////////////////////////
+// Encapsulation: Private Class Fields and Methods
+
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// STATIC version of these 4
+
+class Account {
+  locale = navigator.language;
+  bank = 'Bankist';
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+
+    // this.movements = [];
+    // this.locale = navigator.language;
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public interface (API)
+  getMovements() {
+    return this.#movements;
+    // NOT chainable
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+    return this;
+  }
+
+  #approveLoan(val) {
+    // fake method
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan approved!');
+    }
+    return this;
+  }
+
+  static test() {
+    console.log(`TEST`);
+  }
+}
+
+const acc2 = new Account('Jonas', 'EUR', 1111);
+
+console.log(acc2);
+// console.log(acc2.#movements);
+// acc2.#approveLoan(32);
+
+Account.test();
+
+const movements = acc2
+  .deposit(300)
+  .withdraw(100)
+  .withdraw(50)
+  .requestLoan(25000)
+  .withdraw(400)
+  .getMovements();
+
+console.log(movements);
