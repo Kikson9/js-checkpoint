@@ -100,3 +100,29 @@ const getCountryAndNeighbour = function (country) {
 
 // getCountryAndNeighbour('portugal');
 getCountryAndNeighbour('usa');
+
+////////////////////////////////////////
+// Promises and the Fetch API
+
+const request3 = fetch('https://restcountries.com/v2/name/portugal');
+console.log(request);
+
+const getCountryData2 = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(function (response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(...data);
+      renderCountry(data[0]);
+    });
+};
+
+const getCountryData3 = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+
+getCountryData3('portugal');
