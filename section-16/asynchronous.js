@@ -126,3 +126,24 @@ const getCountryData3 = function (country) {
 };
 
 getCountryData3('portugal');
+
+////////////////////////////////////////
+// Consuming and chaining promises
+
+const getCountryData4 = function (country) {
+  // Country 1
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(response => response.json())
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders?.[0];
+      if (!neighbour) return;
+
+      // Neighbour country
+      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+    })
+    .then(response => response.json())
+    .then(data => renderCountry(data, 'neighbour'));
+};
+
+getCountryData4('portugal');
