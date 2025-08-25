@@ -429,3 +429,56 @@ createImage('img/img-1.jpg')
     currImg.style.display = 'none';
   })
   .catch(err => console.error(err));
+
+/////////////////////////////////
+// Consuming promises with async/await
+
+const getPosition2 = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI3 = async function () {
+  try {
+    // Geolocation
+    const pos = await getPosition2();
+    const { latitude: lat, longitude: lng } = pos.coords;
+
+    // Reverse geocoding
+    const resGeo = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+    );
+    if (!resGeo.ok) throw new Error('Problem getting location data');
+
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+
+    // Country data
+    const res = await fetch(
+      `https://restcountries.com/v2/name/${dataGeo.countryName}`
+    );
+    if (!res.ok) throw new Error('Problem getting country');
+
+    const data = await res.json();
+    renderCountry(data[0]);
+    console.log(data);
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError(`S💥 ${err.message}`);
+  }
+};
+
+whereAmI3();
+whereAmI3();
+whereAmI3();
+
+console.log('FIRST');
+
+// try {
+//   let y = 1;
+//   const x = 2;
+//   x = 3;
+// } catch (err) {
+//   alert(err.message);
+// }
